@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .container label,
+    .container input,
+    .container textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    .container label {
+      font-weight: bold;
+    }
+    
+    .container input[type="checkbox"] {
+      display: inline-block;
+      width: auto;
+      margin-bottom: 0;
+    }
+    
+    .container button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .container button:hover {
+      background-color: #45a049;
+    }
+    
+    .container .error-message {
+      color: #ff0000;
+      margin-top: 5px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+
+      // Name cannot be empty
+      if (name === "") {
+        document.getElementById("name-error").textContent =
+          "Please enter your name";
+        return false;
+      }
+
+      // Email must be a valid email address
+      if (!validateEmail(email)) {
+        document.getElementById("email-error").textContent =
+          "Please enter a valid email address";
+        return false;
+      }
+
+      // Phone number must be a valid 10-digit number
+      if (!validatePhone(phone)) {
+        document.getElementById("phone-error").textContent =
+          "Please enter a valid phone number";
+        return false;
+      }
+
+      // Subject cannot be empty
+      if (subject === "") {
+        document.getElementById("subject-error").textContent =
+          "Please enter a subject";
+        return false;
+      }
+
+      // Message cannot be empty
+      if (message === "") {
+        document.getElementById("message-error").textContent =
+          "Please enter a message";
+        return false;
+      }
+
+      // Form is valid, submit the form
+      alert("Form submitted successfully");
+      return true;
+    }
+
+    function validateEmail(email) {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+
+    function validatePhone(phone) {
+      var re = /^\d{10}$/;
+      return re.test(phone);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Contact Form</h2>
+    <form onsubmit="return validateForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <span class="error-message" id="name-error"></span>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <span class="error-message" id="email-error"></span>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required>
+      <span class="error-message" id="phone-error"></span>
+
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" required>
+      <span class="error-message" id="subject-error"></span>
+
+      <label for="message">Message:</label>
+      <textarea id="message" rows="5" required></textarea>
+      <span class="error-message" id="message-error"></span>
+
+      <label for="subscribe">Subscribe to Newsletter:</label>
+      <input type="checkbox" id="subscribe">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
